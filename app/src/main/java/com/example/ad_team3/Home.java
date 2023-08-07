@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -118,7 +119,9 @@ public class Home extends AppCompatActivity {
                         nearestLocation = "Changi";
                     }
 
-                    Toast.makeText(Home.this, "Nearest location: " + nearestLocation, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Home.this, NearestLocationActivity.class);
+                    intent.putExtra("nearestLocation", nearestLocation);
+                    startActivity(intent);
                 }
             });
         }
