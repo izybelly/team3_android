@@ -3,6 +3,8 @@ package com.example.ad_team3;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class NearestLocationActivity extends AppCompatActivity {
@@ -15,5 +17,14 @@ public class NearestLocationActivity extends AppCompatActivity {
         TextView nearestLocationTextView = findViewById(R.id.nearestLocationTextView);
         String nearestLocation = getIntent().getStringExtra("nearestLocation");
         nearestLocationTextView.setText("Your nearest location is: " + nearestLocation);
+
+        Button submit = findViewById(R.id.submit_nearestloc);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 }

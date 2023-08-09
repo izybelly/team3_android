@@ -47,7 +47,8 @@ public class Home extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(Home.this, AllLocationActivity.class);
+                startActivity(intent);
             }
         });
     }

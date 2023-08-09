@@ -36,7 +36,7 @@
     <android.widget.Button
         android:id="@+id/button1"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:text="Use current location"
         app:layout_constraintTop_toBottomOf="@+id/viewRainfallText"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,7 +49,7 @@
     <android.widget.Button
         android:id="@+id/button2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:text="Select location"
         app:layout_constraintTop_toBottomOf="@+id/viewRainfallText"
         app:layout_constraintStart_toEndOf="@+id/button1"
