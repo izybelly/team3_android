@@ -12,6 +12,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 public class Home extends AppCompatActivity {
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private HandlerThread locationThread;
+    private Handler locationHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,10 @@ public class Home extends AppCompatActivity {
 
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
+
+        locationThread = new HandlerThread("LocationThread");
+        locationThread.start();
+        locationHandler = new Handler(locationThread.getLooper());
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +47,12 @@ public class Home extends AppCompatActivity {
                             LOCATION_PERMISSION_REQUEST_CODE);
                 } else {
                     // Permission is already granted, proceed with location access
-                    accessLocation();
+                    locationHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            accessLocation();
+                        }
+                    });
                 }
             }
         });
@@ -51,6 +64,15 @@ public class Home extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Quit the HandlerThread when the activity is destroyed
+        if (locationThread != null) {
+            locationThread.quit();
+        }
     }
 
     @Override
