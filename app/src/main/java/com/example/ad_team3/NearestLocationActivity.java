@@ -22,7 +22,9 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,61 +71,119 @@ public class NearestLocationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int selectedValue = seekBar.getProgress() + 1;
 
-                List<RainfallData> rainfallDataEntries = new ArrayList<>();
-                RainfallData ent_2022_06 = new RainfallData();
-                ent_2022_06.setY(211.8);
-                ent_2022_06.setDs("2022-06");
+                String jsonBody = "{\n" +
+                        "  \"data\": [\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2022-06\",\n" +
+                        "      \"y\": 211.8\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2022-07\",\n" +
+                        "      \"y\": 145.2\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2022-08\",\n" +
+                        "      \"y\": 141.4\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2022-09\",\n" +
+                        "      \"y\": 121.0\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2022-10\",\n" +
+                        "      \"y\": 279.6\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2022-11\",\n" +
+                        "      \"y\": 313.8\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2022-12\",\n" +
+                        "      \"y\": 215.4\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2023-01\",\n" +
+                        "      \"y\": 302.6\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2023-02\",\n" +
+                        "      \"y\": 324.40000000000003\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2023-03\",\n" +
+                        "      \"y\": 243.4\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2023-04\",\n" +
+                        "      \"y\": 222.8\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2023-05\",\n" +
+                        "      \"y\": 112.8\n" +
+                        "    },\n" +
+                        "    {\n" +
+                        "      \"ds\": \"2023-06\",\n" +
+                        "      \"y\": 228.4\n" +
+                        "    }\n" +
+                        "  ]\n" +
+                        "}";
 
-                RainfallData ent_2022_07 = new RainfallData();
-                ent_2022_07.setY(145.2);
-                ent_2022_07.setDs("2022-07");
 
-                RainfallData ent_2022_08 = new RainfallData();
-                ent_2022_08.setY(141.4);
-                ent_2022_08.setDs("2022-08");
-
-                RainfallData ent_2022_09 = new RainfallData();
-                ent_2022_09.setY(121.0);
-                ent_2022_09.setDs("2022-09");
-
-                RainfallData ent_2022_10 = new RainfallData();
-                ent_2022_10.setY(279.6);
-                ent_2022_10.setDs("2022-10");
-
-                RainfallData ent_2022_11 = new RainfallData();
-                ent_2022_11.setY(313.8);
-                ent_2022_11.setDs("2022-11");
-
-                RainfallData ent_2022_12 = new RainfallData();
-                ent_2022_12.setY(215.4);
-                ent_2022_12.setDs("2022-12");
-
-                RainfallData ent_2023_01 = new RainfallData();
-                ent_2023_01.setY(302.6);
-                ent_2023_01.setDs("2023-01");
-
-                RainfallData ent_2023_02 = new RainfallData();
-                ent_2023_02.setY(324.40000000000003);
-                ent_2023_02.setDs("2023-02");
-
-                RainfallData ent_2023_03 = new RainfallData();
-                ent_2023_03.setY(243.4);
-                ent_2023_03.setDs("2023-03");
-
-                RainfallData ent_2023_04 = new RainfallData();
-                ent_2023_04.setY(222.8);
-                ent_2023_04.setDs("2023-04");
-
-                RainfallData ent_2023_05 = new RainfallData();
-                ent_2023_05.setY(112.8);
-                ent_2023_05.setDs("2023-05");
-
-                RainfallData ent_2023_06 = new RainfallData();
-                ent_2023_06.setY(228.4);
-                ent_2023_06.setDs("2023-06");
-
-                RainfallDataList rainfallDataList = new RainfallDataList();
-                rainfallDataList.setData(rainfallDataEntries);
+//                List<RainfallData> rainfallDataEntries = new ArrayList<>();
+//                RainfallData ent_2022_06 = new RainfallData();
+//                ent_2022_06.setY(211.8);
+//                ent_2022_06.setDs("2022-06");
+//
+//                RainfallData ent_2022_07 = new RainfallData();
+//                ent_2022_07.setY(145.2);
+//                ent_2022_07.setDs("2022-07");
+//
+//                RainfallData ent_2022_08 = new RainfallData();
+//                ent_2022_08.setY(141.4);
+//                ent_2022_08.setDs("2022-08");
+//
+//                RainfallData ent_2022_09 = new RainfallData();
+//                ent_2022_09.setY(121.0);
+//                ent_2022_09.setDs("2022-09");
+//
+//                RainfallData ent_2022_10 = new RainfallData();
+//                ent_2022_10.setY(279.6);
+//                ent_2022_10.setDs("2022-10");
+//
+//                RainfallData ent_2022_11 = new RainfallData();
+//                ent_2022_11.setY(313.8);
+//                ent_2022_11.setDs("2022-11");
+//
+//                RainfallData ent_2022_12 = new RainfallData();
+//                ent_2022_12.setY(215.4);
+//                ent_2022_12.setDs("2022-12");
+//
+//                RainfallData ent_2023_01 = new RainfallData();
+//                ent_2023_01.setY(302.6);
+//                ent_2023_01.setDs("2023-01");
+//
+//                RainfallData ent_2023_02 = new RainfallData();
+//                ent_2023_02.setY(324.40000000000003);
+//                ent_2023_02.setDs("2023-02");
+//
+//                RainfallData ent_2023_03 = new RainfallData();
+//                ent_2023_03.setY(243.4);
+//                ent_2023_03.setDs("2023-03");
+//
+//                RainfallData ent_2023_04 = new RainfallData();
+//                ent_2023_04.setY(222.8);
+//                ent_2023_04.setDs("2023-04");
+//
+//                RainfallData ent_2023_05 = new RainfallData();
+//                ent_2023_05.setY(112.8);
+//                ent_2023_05.setDs("2023-05");
+//
+//                RainfallData ent_2023_06 = new RainfallData();
+//                ent_2023_06.setY(228.4);
+//                ent_2023_06.setDs("2023-06");
+//
+//                RainfallDataList rainfallDataList = new RainfallDataList();
+//                rainfallDataList.setData(rainfallDataEntries);
 
                 String baseUrl = "https://8.222.245.68:8080/";
 
@@ -157,11 +217,28 @@ public class NearestLocationActivity extends AppCompatActivity {
                         periods,
                         wRMSE,
                         wMAPE,
-                        rainfallDataList
+                        jsonBody
                 );
 
                 String fullUrl = call.request().url().toString();
                 Log.d("Full URL", fullUrl);
+
+                RequestBody requestBody = call.request().body();
+                String requestBodyString = null;
+                if (requestBody instanceof FormBody) {
+                    FormBody formBody = (FormBody) requestBody;
+                    StringBuilder bodyBuilder = new StringBuilder();
+                    for (int i = 0; i < formBody.size(); i++) {
+                        bodyBuilder.append(formBody.encodedName(i))
+                                .append(": ")
+                                .append(formBody.encodedValue(i))
+                                .append(", ");
+                    }
+                    if (bodyBuilder.length() > 0) {
+                        bodyBuilder.setLength(bodyBuilder.length() - 2);
+                    }
+                    requestBodyString = bodyBuilder.toString();
+                }
 
                 call.enqueue(new Callback<ResponseBody>() {
                     @Override

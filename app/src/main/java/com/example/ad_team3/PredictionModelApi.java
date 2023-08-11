@@ -19,7 +19,7 @@ public interface PredictionModelApi {
             @Query("periods") int periods,
             @Query("wRMSE") int wRMSE,
             @Query("wMAPE") int wMAPE,
-            @Body RainfallDataList rainfallDataList
+            @Body String rainfallDataList
     );
 
 
