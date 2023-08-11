@@ -185,7 +185,7 @@ public class NearestLocationActivity extends AppCompatActivity {
 //                RainfallDataList rainfallDataList = new RainfallDataList();
 //                rainfallDataList.setData(rainfallDataEntries);
 
-                String baseUrl = "https://8.222.245.68:8080/";
+                String baseUrl = "http://8.222.245.68:8080/";
 
                 // Create a custom OkHttpClient with the TrustManager that trusts all certificates (only for testing, not recommended for production)
                 OkHttpClient okHttpClient = getUnsafeOkHttpClient();
