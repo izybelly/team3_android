@@ -1,28 +1,34 @@
 package com.example.ad_team3;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class RainfallData {
-    @SerializedName("ds")
-    private String ds;
+import java.io.Serializable;
 
-    @SerializedName("y")
-    private double y;
 
-    public String getDs(){
-        return ds;
+public class RainfallData implements Serializable {
+    @SerializedName("Date")
+    private String date;
+
+    @SerializedName("Actual Rainfall (mm)")
+    private double actualRainfall;
+
+    @SerializedName("Predicted Rainfall (mm)")
+    private double predictedRainfall;
+
+    public String getDate() {
+        return date;
     }
 
-    public void setDs(String ds){
-        this.ds = ds;
+    public double getActualRainfall() {
+        return actualRainfall;
     }
 
-    public double getY(){
-        return y;
+    public double getPredictedRainfall() {
+        return predictedRainfall;
     }
 
-    public void setY(double y){
-        this.y = y;
-    }
 }
 
