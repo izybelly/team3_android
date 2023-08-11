@@ -10,7 +10,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
+import java.io.Console;
 import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -127,6 +130,10 @@ public class NearestLocationActivity extends AppCompatActivity {
                         "    }\n" +
                         "  ]\n" +
                         "}";
+                Log.d("JsonBody",jsonBody);
+                // Parse the JSON string into a JsonObject
+                JsonParser jsonParser = new JsonParser();
+                JsonObject jsonObjectbody = jsonParser.parse(jsonBody).getAsJsonObject();
 
 
 //                List<RainfallData> rainfallDataEntries = new ArrayList<>();
@@ -217,7 +224,7 @@ public class NearestLocationActivity extends AppCompatActivity {
                         periods,
                         wRMSE,
                         wMAPE,
-                        jsonBody
+                        jsonObjectbody
                 );
 
                 String fullUrl = call.request().url().toString();
@@ -254,15 +261,17 @@ public class NearestLocationActivity extends AppCompatActivity {
                                 Gson gson = new Gson();
                                 PredictionModel predictionModel = gson.fromJson(responseBody, PredictionModel.class);
 
-                                // Use the predictionModel data as needed
-                                String message = "Default Model ID: " + predictionModel.getModelId();
-                                Log.d("Nearest Location Activity", message);
+
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } else {
                             // Handle the error here
-                            Log.e("Nearest Location Activity", "Error: " + response.message());
+                            try {
+                                Log.e("Nearest Location Activity", "Error: " + response.message() + response.errorBody().string());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
 

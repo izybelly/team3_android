@@ -1,4 +1,6 @@
 package com.example.ad_team3;
+import com.google.gson.JsonObject;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,7 +21,7 @@ public interface PredictionModelApi {
             @Query("periods") int periods,
             @Query("wRMSE") int wRMSE,
             @Query("wMAPE") int wMAPE,
-            @Body String rainfallDataList
+            @Body JsonObject rainfallDataList
     );
 
 
