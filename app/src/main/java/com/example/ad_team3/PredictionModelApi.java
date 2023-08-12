@@ -24,6 +24,12 @@ public interface PredictionModelApi {
             @Body JsonObject rainfallDataList
     );
 
+    @POST("/api/getPredictionModel")
+    Call<ResponseBody> retrieveRainfallData(
+            @Query("stationId") int stationId,
+            @Query("predictionPeriod") int predictionPeriod
+    );
+
 
 
 }

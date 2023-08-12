@@ -74,125 +74,7 @@ public class NearestLocationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int selectedValue = seekBar.getProgress() + 1;
 
-                String jsonBody = "{\n" +
-                        "  \"data\": [\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2022-06\",\n" +
-                        "      \"y\": 211.8\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2022-07\",\n" +
-                        "      \"y\": 145.2\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2022-08\",\n" +
-                        "      \"y\": 141.4\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2022-09\",\n" +
-                        "      \"y\": 121.0\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2022-10\",\n" +
-                        "      \"y\": 279.6\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2022-11\",\n" +
-                        "      \"y\": 313.8\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2022-12\",\n" +
-                        "      \"y\": 215.4\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2023-01\",\n" +
-                        "      \"y\": 302.6\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2023-02\",\n" +
-                        "      \"y\": 324.40000000000003\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2023-03\",\n" +
-                        "      \"y\": 243.4\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2023-04\",\n" +
-                        "      \"y\": 222.8\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2023-05\",\n" +
-                        "      \"y\": 112.8\n" +
-                        "    },\n" +
-                        "    {\n" +
-                        "      \"ds\": \"2023-06\",\n" +
-                        "      \"y\": 228.4\n" +
-                        "    }\n" +
-                        "  ]\n" +
-                        "}";
-                Log.d("JsonBody",jsonBody);
-                // Parse the JSON string into a JsonObject
-                JsonParser jsonParser = new JsonParser();
-                JsonObject jsonObjectbody = jsonParser.parse(jsonBody).getAsJsonObject();
-
-
-//                List<RainfallData> rainfallDataEntries = new ArrayList<>();
-//                RainfallData ent_2022_06 = new RainfallData();
-//                ent_2022_06.setY(211.8);
-//                ent_2022_06.setDs("2022-06");
-//
-//                RainfallData ent_2022_07 = new RainfallData();
-//                ent_2022_07.setY(145.2);
-//                ent_2022_07.setDs("2022-07");
-//
-//                RainfallData ent_2022_08 = new RainfallData();
-//                ent_2022_08.setY(141.4);
-//                ent_2022_08.setDs("2022-08");
-//
-//                RainfallData ent_2022_09 = new RainfallData();
-//                ent_2022_09.setY(121.0);
-//                ent_2022_09.setDs("2022-09");
-//
-//                RainfallData ent_2022_10 = new RainfallData();
-//                ent_2022_10.setY(279.6);
-//                ent_2022_10.setDs("2022-10");
-//
-//                RainfallData ent_2022_11 = new RainfallData();
-//                ent_2022_11.setY(313.8);
-//                ent_2022_11.setDs("2022-11");
-//
-//                RainfallData ent_2022_12 = new RainfallData();
-//                ent_2022_12.setY(215.4);
-//                ent_2022_12.setDs("2022-12");
-//
-//                RainfallData ent_2023_01 = new RainfallData();
-//                ent_2023_01.setY(302.6);
-//                ent_2023_01.setDs("2023-01");
-//
-//                RainfallData ent_2023_02 = new RainfallData();
-//                ent_2023_02.setY(324.40000000000003);
-//                ent_2023_02.setDs("2023-02");
-//
-//                RainfallData ent_2023_03 = new RainfallData();
-//                ent_2023_03.setY(243.4);
-//                ent_2023_03.setDs("2023-03");
-//
-//                RainfallData ent_2023_04 = new RainfallData();
-//                ent_2023_04.setY(222.8);
-//                ent_2023_04.setDs("2023-04");
-//
-//                RainfallData ent_2023_05 = new RainfallData();
-//                ent_2023_05.setY(112.8);
-//                ent_2023_05.setDs("2023-05");
-//
-//                RainfallData ent_2023_06 = new RainfallData();
-//                ent_2023_06.setY(228.4);
-//                ent_2023_06.setDs("2023-06");
-//
-//                RainfallDataList rainfallDataList = new RainfallDataList();
-//                rainfallDataList.setData(rainfallDataEntries);
-
-                String baseUrl = "http://8.222.245.68:8080/";
+                String baseUrl = "https://10.0.2.2:8443/";
 
                 // Create a custom OkHttpClient with the TrustManager that trusts all certificates (only for testing, not recommended for production)
                 OkHttpClient okHttpClient = getUnsafeOkHttpClient();
@@ -201,30 +83,30 @@ public class NearestLocationActivity extends AppCompatActivity {
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl(baseUrl)
                         .client(okHttpClient)
-                        .addConverterFactory(GsonConverterFactory.create())
+//                        .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
                 // Create an instance of your PredictionModelApi interface
                 PredictionModelApi api = retrofit.create(PredictionModelApi.class);
 
-                String startDate = "2022-06";
-                String endDate = "2023-06";
-                String modelId = "0600";
-                String nearestLocation = "changi";
-                int periods = selectedValue;
-                int wRMSE = 12;
-                int wMAPE = 12;
+//                String startDate = "2022-06";
+//                String endDate = "2023-06";
+//                String modelId = "0600";
+//                String nearestLocation = "changi";
+                int periods = selectedValue + 12;
+                int stationId = 0;
+                if (nearestLocation == "Clementi"){
+                    stationId = 1;
+                } else {
+                    stationId = 2;
+                }
+//                int wRMSE = 12;
+//                int wMAPE = 12;
 
                 // Make the API call
-                Call<ResponseBody> call = api.sendRainfallData(
-                        startDate,
-                        endDate,
-                        modelId,
-                        nearestLocation,
-                        periods,
-                        wRMSE,
-                        wMAPE,
-                        jsonObjectbody
+                Call<ResponseBody> call = api.retrieveRainfallData(
+                        stationId,
+                        periods
                 );
 
                 String fullUrl = call.request().url().toString();
