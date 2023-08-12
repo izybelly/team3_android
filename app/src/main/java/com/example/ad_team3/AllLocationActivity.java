@@ -48,14 +48,14 @@ public class AllLocationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CheckBox changi = findViewById(R.id.checkbox1);
                 CheckBox clementi = findViewById(R.id.checkbox2);
-                CheckBox sentosa = findViewById(R.id.checkbox3);
-                CheckBox kranji = findViewById(R.id.checkbox4);
+//                CheckBox sentosa = findViewById(R.id.checkbox3);
+//                CheckBox kranji = findViewById(R.id.checkbox4);
                 int months = seekBar.getProgress() + 1;
 
                 boolean changiIsChecked = changi.isChecked();
                 boolean clementiIsChecked = clementi.isChecked();
-                boolean sentosaIsChecked = sentosa.isChecked();
-                boolean kranjiIsChecked = kranji.isChecked();
+//                boolean sentosaIsChecked = sentosa.isChecked();
+//                boolean kranjiIsChecked = kranji.isChecked();
 
                 JSONObject requestPrediction = new JSONObject();
                 try{
@@ -66,12 +66,12 @@ public class AllLocationActivity extends AppCompatActivity {
                     if (clementiIsChecked){
                         requestPrediction.put("clementi", true);
                     }
-                    if (sentosaIsChecked){
-                        requestPrediction.put("sentosa", true);
-                    }
-                    if (kranjiIsChecked){
-                        requestPrediction.put("kranji", true);
-                    }
+//                    if (sentosaIsChecked){
+//                        requestPrediction.put("sentosa", true);
+//                    }
+//                    if (kranjiIsChecked){
+//                        requestPrediction.put("kranji", true);
+//                    }
 
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
