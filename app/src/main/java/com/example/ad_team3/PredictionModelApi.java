@@ -12,6 +12,12 @@ public interface PredictionModelApi {
     @GET("/api/getDefaultModel")
     Call<PredictionModel> getDefaultModel();
 
+    @POST("/api/receiveData")
+    Call<ResponseBody> sendDataToSpringBoot(@Body DataRequest requestData);
+
+    @POST("/api/sendData")
+    Call<DataRequest> receiveDataFromSpringBoot();
+
     @POST("/user/neuralprophet")
     Call<ResponseBody> sendRainfallData(
             @Query("sDate") String startDate,

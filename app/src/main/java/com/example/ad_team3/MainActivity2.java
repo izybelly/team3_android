@@ -1,12 +1,12 @@
 package com.example.ad_team3;
-import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Bundle;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.security.cert.CertificateException;
@@ -24,48 +24,39 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
-        // Create a custom OkHttpClient with the TrustManager that trusts all certificates (only for testing, not recommended for production)
         OkHttpClient okHttpClient = getUnsafeOkHttpClient();
 
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
 
-        // Create a Retrofit instance with your Spring Boot server URL and the custom OkHttpClient
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://10.0.2.2:8443/")
+                .baseUrl("http://10.0.2.2:8443/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        // Create an instance of your PredictionModelApi interface
         PredictionModelApi api = retrofit.create(PredictionModelApi.class);
 
-        DataRequest requestData = new DataRequest();
-        requestData.setParameter1("Parameter One");
-        requestData.setParameter2(2);
+        Call<DataRequest> call = api.receiveDataFromSpringBoot();
+        call.enqueue(new Callback<DataRequest>() {
 
-        // Make the API call
-        Call<ResponseBody> call = api.sendDataToSpringBoot(requestData);
-        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<DataRequest> call, Response<DataRequest> response) {
                 if (response.isSuccessful()) {
-                    // Handle the successful response here
-                    String responseBody = null;
-                    try {
-                        responseBody = response.body().string();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    Log.d("AndroidApp", "Response: "+ responseBody);
+                    DataRequest data = response.body();
+                    String parameter1 = data.getParameter1();
+                    int parameter2 = data.getParameter2();
+                    // Use the data as needed
+                    Log.d("AndroidApp", "Parameter1: " + parameter1);
+                    Log.d("AndroidApp", "Parameter2: " + parameter2);
                 } else {
                     // Handle the error here
                     Log.e("AndroidApp", "Error: " + response.message());
@@ -73,12 +64,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<DataRequest> call, Throwable t) {
                 // Handle network failure here
                 Log.e("AndroidApp", "Network Failure: " + t.getMessage());
             }
         });
     }
+
 
     // Method to create a custom OkHttpClient that trusts all certificates (only for testing, not recommended for production)
     private OkHttpClient getUnsafeOkHttpClient() {
@@ -113,3 +105,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
