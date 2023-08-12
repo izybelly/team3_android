@@ -93,7 +93,7 @@ public class NearestLocationActivity extends AppCompatActivity {
 //                String endDate = "2023-06";
 //                String modelId = "0600";
 //                String nearestLocation = "changi";
-                int periods = selectedValue + 12;
+                int periods = selectedValue;
                 int stationId = 0;
                 if (nearestLocation == "Clementi"){
                     stationId = 1;
