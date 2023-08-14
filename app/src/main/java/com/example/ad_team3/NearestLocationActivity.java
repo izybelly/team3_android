@@ -171,7 +171,8 @@ public class NearestLocationActivity extends AppCompatActivity {
 
                                     Log.d("Nearest Location Activitity", "Actual Rainfall for " + currentYearMonth + ": " + actualRainfall);
                                     Log.d("Nearest Location Activitity", "Predicted Rainfall for " + currentYearMonth + ": " + predictedRainfall);
-                                    visualize_return(rainfallDataList);
+                                    String serializedData = gson.toJson(rainfallDataList);
+                                    visualize_return(serializedData);
                                 } else {
                                     Log.e("Nearest Location Activity", "Data not found for" + currentYearMonth);
                                 }
@@ -235,11 +236,11 @@ public class NearestLocationActivity extends AppCompatActivity {
 
     }
 
-    protected void visualize_return(RainfallDataList rainfallDataList) {
+    protected void visualize_return(String serializedData) {
         Intent intent = new Intent(NearestLocationActivity.this, RainfallChart.class);
 
         // Pass the list of RainfallData as an extra in the intent
-        intent.putExtra("rainfallDataList", (Serializable) rainfallDataList);
+        intent.putExtra("rainfallDataListJson", serializedData);
         intent.putExtra("station",nearestLocation);
         // Start the next activity
         startActivity(intent);

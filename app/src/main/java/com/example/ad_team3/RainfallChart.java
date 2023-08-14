@@ -20,6 +20,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,13 +36,17 @@ public class RainfallChart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rainfall_chart);
+        Gson gson = new Gson();
 
         // Retrieve the list of RainfallData from the intent
-        List<RainfallData> rainfallDataList = (List<RainfallData>) getIntent().getSerializableExtra("rainfallDataList");
+        String serializedData = getIntent().getStringExtra("rainfallDataListJson");
+        RainfallDataList rainfallDataList = gson.fromJson(serializedData, RainfallDataList.class);
+        List<RainfallData> dataList = rainfallDataList.getData();
         String stationNameStr = getIntent().getStringExtra("station");
         TextView chartTitle=findViewById(R.id.chartTitle);
         chartTitle.setText("Recorded Rainfall and Prediction\n"+ stationNameStr);
-        chartData(rainfallDataList);
+        Log.d("RainfallChart", "Rainfall Chart Test");
+        chartData(dataList);
     }
 
     protected void chartData(List<RainfallData> rainfallDataList){
