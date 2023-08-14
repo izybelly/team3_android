@@ -17,6 +17,7 @@ import java.io.Console;
 import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -141,8 +142,30 @@ public class NearestLocationActivity extends AppCompatActivity {
                                 // Now you can parse the JSON string as needed using a JSON library like Gson
                                 // For example, if you have a PredictionModel class, you can deserialize the JSON:
                                 Gson gson = new Gson();
-                                PredictionModel predictionModel = gson.fromJson(responseBody, PredictionModel.class);
+                                RainfallDataList rainfallDataList = gson.fromJson(responseBody, RainfallDataList.class);
 
+                                Calendar calendar = Calendar.getInstance();
+                                SimpleDateFormat yearMonthFormat = new SimpleDateFormat("yyyy-MM");
+                                String currentYearMonth = yearMonthFormat.format(calendar.getTime());
+
+                                RainfallData currentData = null;
+
+
+                                for (RainfallData data: rainfallDataList.getData()){
+                                    if (data.getDate().equals(currentYearMonth)){
+                                        currentData = data;
+                                        break;
+                                    }
+                                }
+                                if (currentData != null){
+                                    double actualRainfall = currentData.getActualRainfall();
+                                    double predictedRainfall = currentData.getPredictedRainfall();
+
+                                    Log.d("Nearest Location Activitity", "Actual Rainfall for " + currentYearMonth + ": " + actualRainfall);
+                                    Log.d("Nearest Location Activitity", "Predicted Rainfall for " + currentYearMonth + ": " + predictedRainfall);
+                                } else {
+                                    Log.e("Nearest Location Activity", "Data not found for" + currentYearMonth);
+                                }
 
                             } catch (IOException e) {
                                 e.printStackTrace();
