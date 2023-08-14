@@ -118,7 +118,7 @@ public class AllLocationActivity extends AppCompatActivity {
                                 try {
                                     // Handle the successful response here
                                     String responseBody = response.body().string(); // Convert response body to string
-                                    Log.d("All Location Activity", "Response JSON: " + responseBody);
+                                    Log.d("All Location Activity", "Response JSON for stationId: " + stationId + " " + responseBody);
 
                                     // Now you can parse the JSON string as needed using a JSON library like Gson
                                     // For example, if you have a PredictionModel class, you can deserialize the JSON:
