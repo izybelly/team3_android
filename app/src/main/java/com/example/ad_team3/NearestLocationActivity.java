@@ -2,7 +2,9 @@ package com.example.ad_team3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +12,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.Console;
 import java.io.IOException;
+import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.SimpleDateFormat;
@@ -138,10 +144,12 @@ public class NearestLocationActivity extends AppCompatActivity {
                                 // Handle the successful response here
                                 String responseBody = response.body().string(); // Convert response body to string
                                 Log.d("Nearest Location Activity", "Response JSON: " + responseBody);
+//                                JsonParser jsonParser = new JsonParser();
+//                                JsonObject jsonObject = jsonParser.parse(responseBody).getAsJsonObject();
+//                                JsonArray jsonDataArray = jsonObject.getAsJsonArray("data"); // Extract the "data" array
 
-                                // Now you can parse the JSON string as needed using a JSON library like Gson
-                                // For example, if you have a PredictionModel class, you can deserialize the JSON:
                                 Gson gson = new Gson();
+
                                 RainfallDataList rainfallDataList = gson.fromJson(responseBody, RainfallDataList.class);
 
                                 Calendar calendar = Calendar.getInstance();
@@ -163,20 +171,20 @@ public class NearestLocationActivity extends AppCompatActivity {
 
                                     Log.d("Nearest Location Activitity", "Actual Rainfall for " + currentYearMonth + ": " + actualRainfall);
                                     Log.d("Nearest Location Activitity", "Predicted Rainfall for " + currentYearMonth + ": " + predictedRainfall);
+                                    visualize_return(rainfallDataList);
                                 } else {
                                     Log.e("Nearest Location Activity", "Data not found for" + currentYearMonth);
                                 }
+//                                Type listType = new TypeToken<List<RainfallData>>() {}.getType();
+//                                rainfallDataList = gson.fromJson(jsonDataArray, listType);
+
 
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         } else {
                             // Handle the error here
-                            try {
-                                Log.e("Nearest Location Activity", "Error: " + response.message() + response.errorBody().string());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
+                            Log.e("Nearest Location Activity", "Error: " + response.message());
                         }
                     }
 
@@ -220,4 +228,21 @@ public class NearestLocationActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             }
-        });}}
+        });}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    protected void visualize_return(RainfallDataList rainfallDataList) {
+        Intent intent = new Intent(NearestLocationActivity.this, RainfallChart.class);
+
+        // Pass the list of RainfallData as an extra in the intent
+        intent.putExtra("rainfallDataList", (Serializable) rainfallDataList);
+        intent.putExtra("station",nearestLocation);
+        // Start the next activity
+        startActivity(intent);
+    }
+
+}

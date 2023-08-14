@@ -1,5 +1,8 @@
 package com.example.ad_team3;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 public class RainfallData {
@@ -57,6 +60,5 @@ public class RainfallData {
     public void setMape(double mape) {
         this.mape = mape;
     }
-
 }
 
