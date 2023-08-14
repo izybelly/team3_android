@@ -2,6 +2,7 @@ package com.example.ad_team3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class AllLocationActivity extends AppCompatActivity {
+    List<Integer> stationIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +95,7 @@ public class AllLocationActivity extends AppCompatActivity {
 
                 PredictionModelApi api = retrofit.create(PredictionModelApi.class);
 
-                List<Integer> stationIds = new ArrayList<>();
+
                 if (changiIsChecked) {
                     stationIds.add(2);
                 }
@@ -145,6 +147,9 @@ public class AllLocationActivity extends AppCompatActivity {
 
                                         Log.d("All Location Activitity", "Actual Rainfall for " + currentYearMonth + ": " + actualRainfall);
                                         Log.d("All Location Activitity", "Predicted Rainfall for " + currentYearMonth + ": " + predictedRainfall);
+                                        String serializedData = gson.toJson(rainfallDataList);
+                                        visualize_return(serializedData, stationId);
+
                                     } else {
                                         Log.e("All Location Activity", "Data not found for" + currentYearMonth);
                                     }
@@ -211,4 +216,31 @@ public class AllLocationActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
             }
-        });}}
+        });}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
+    protected void visualize_return(String serializedData, int stationId) {
+        Intent intent = new Intent(AllLocationActivity.this, RainfallChart.class);
+
+        String stationIdStr;
+        if (stationId == 1){
+            stationIdStr = "Clementi";
+        } else {
+            stationIdStr = "Changi";
+        }
+
+
+
+        // Pass the list of RainfallData as an extra in the intent
+        intent.putExtra("rainfallDataListJson", serializedData);
+        intent.putExtra("station", stationIdStr);
+        // Start the next activity
+        startActivity(intent);
+    }
+
+
+}

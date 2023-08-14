@@ -96,6 +96,16 @@ public class RainfallChart extends AppCompatActivity {
             index++;
         }
 
+        Log.d("RainfallChart", "Actual Rainfall Entries: " + actualRainfallEntries.size());
+        for (Entry entry : actualRainfallEntries) {
+            Log.d("RainfallChart", "Actual Entry: " + entry.toString());
+        }
+
+        Log.d("RainfallChart", "Predicted Rainfall Entries: " + predictedRainfallEntries.size());
+        for (Entry entry : predictedRainfallEntries) {
+            Log.d("RainfallChart", "Predicted Entry: " + entry.toString());
+        }
+
 
         // Configure dataSet
         LineDataSet actualRainfallDataSet = new LineDataSet(actualRainfallEntries, "Actual Rainfall");
@@ -124,8 +134,8 @@ public class RainfallChart extends AppCompatActivity {
         predictedRainfallDataSet.setValueTextSize(12f); // Set the text size of the values
         predictedRainfallDataSet.setMode(LineDataSet.Mode.LINEAR); // Set to draw lines
         predictedRainfallDataSet.setHighlightEnabled(true); // Disable highlighting of data points
-        predictedRainfallDataSet.enableDashedLine(10f, 5f, 0f); // Enable dashed line effect
-        predictedRainfallDataSet.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f)); // Set form line dash effect to make legend's line dashed as well
+//        predictedRainfallDataSet.enableDashedLine(10f, 5f, 0f); // Enable dashed line effect
+//        predictedRainfallDataSet.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f)); // Set form line dash effect to make legend's line dashed as well
 
         List<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
 
