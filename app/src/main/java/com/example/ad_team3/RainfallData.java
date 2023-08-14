@@ -3,26 +3,60 @@ package com.example.ad_team3;
 import com.google.gson.annotations.SerializedName;
 
 public class RainfallData {
-    @SerializedName("ds")
-    private String ds;
+    private double actualRainfall;
+    private String date;
+    private double predictedRainfall;
+    private double residuals;
+    private double rollingRMSE;
+    private double mape;
 
-    @SerializedName("y")
-    private double y;
-
-    public String getDs(){
-        return ds;
+    public double getActualRainfall() {
+        return actualRainfall;
     }
 
-    public void setDs(String ds){
-        this.ds = ds;
+    public void setActualRainfall(double actualRainfall) {
+        this.actualRainfall = actualRainfall;
     }
 
-    public double getY(){
-        return y;
+    public String getDate() {
+        return date;
     }
 
-    public void setY(double y){
-        this.y = y;
+    public void setDate(String date) {
+        this.date = date;
     }
+
+    public double getPredictedRainfall() {
+        return predictedRainfall;
+    }
+
+    public void setPredictedRainfall(double predictedRainfall) {
+        this.predictedRainfall = predictedRainfall;
+    }
+
+    public double getResiduals() {
+        return residuals;
+    }
+
+    public void setResiduals(double residuals) {
+        this.residuals = residuals;
+    }
+
+    public double getRollingRMSE() {
+        return rollingRMSE;
+    }
+
+    public void setRollingRMSE(double rollingRMSE) {
+        this.rollingRMSE = rollingRMSE;
+    }
+
+    public double getMape() {
+        return mape;
+    }
+
+    public void setMape(double mape) {
+        this.mape = mape;
+    }
+
 }
 
