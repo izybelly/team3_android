@@ -110,13 +110,13 @@ public class Home extends AppCompatActivity {
                     double clementiLat = 1.3337;
                     double clementiLong = 103.7768;
 
-                    // Coordinates of Sentosa station (double check)
-                    double sentosaLat = 1.27472;
-                    double sentosaLong = 103.80389;
-
-                    // Coordinates of Kranji Way station (double check)
-                    double kranjiLat = 1.4387;
-                    double kranjiLong = 103.7363;
+//                    // Coordinates of Sentosa station (double check)
+//                    double sentosaLat = 1.27472;
+//                    double sentosaLong = 103.80389;
+//
+//                    // Coordinates of Kranji Way station (double check)
+//                    double kranjiLat = 1.4387;
+//                    double kranjiLong = 103.7363;
 
                     float[] results = new float[1];
                     Location.distanceBetween(userLat, userLong, changiLat, changiLong, results);
@@ -125,21 +125,17 @@ public class Home extends AppCompatActivity {
                     Location.distanceBetween(userLat, userLong, clementiLat, clementiLong, results);
                     float distanceToClementi = results[0];
 
-                    Location.distanceBetween(userLat, userLong, sentosaLat, sentosaLong, results);
-                    float distanceToSentosa = results[0];
-
-                    Location.distanceBetween(userLat, userLong, kranjiLat, kranjiLong, results);
-                    float distanceToKranji = results[0];
+//                    Location.distanceBetween(userLat, userLong, sentosaLat, sentosaLong, results);
+//                    float distanceToSentosa = results[0];
+//
+//                    Location.distanceBetween(userLat, userLong, kranjiLat, kranjiLong, results);
+//                    float distanceToKranji = results[0];
 
                     String nearestLocation;
-                    if (distanceToChangi < distanceToClementi && distanceToChangi < distanceToSentosa && distanceToChangi < distanceToKranji) {
+                    if (distanceToChangi < distanceToClementi) {
                         nearestLocation = "Changi";
-                    } else if (distanceToClementi < distanceToSentosa && distanceToClementi < distanceToKranji) {
-                        nearestLocation = "Clementi";
-                    } else if (distanceToSentosa < distanceToKranji) {
-                        nearestLocation = "Sentosa";
                     } else {
-                        nearestLocation = "Changi";
+                        nearestLocation = "Clementi";
                     }
 
                     Intent intent = new Intent(Home.this, NearestLocationActivity.class);

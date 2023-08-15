@@ -9,19 +9,11 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface PredictionModelApi {
-    @GET("/api/getDefaultModel")
-    Call<PredictionModel> getDefaultModel();
 
-    @POST("/user/neuralprophet")
+    @POST("/api/getPredictionModel")
     Call<ResponseBody> sendRainfallData(
-            @Query("sDate") String startDate,
-            @Query("eDate") String endDate,
-            @Query("mId") String modelId,
-            @Query("sId") String locationId,
-            @Query("periods") int periods,
-            @Query("wRMSE") int wRMSE,
-            @Query("wMAPE") int wMAPE,
-            @Body JsonObject rainfallDataList
+            @Query("stationId") int stationId,
+            @Query("predictionPeriod") int periods
     );
 
 

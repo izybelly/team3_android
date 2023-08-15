@@ -9,13 +9,13 @@ import java.io.Serializable;
 
 
 public class RainfallData implements Serializable {
-    @SerializedName("Date")
+    @SerializedName("date")
     private String date;
 
-    @SerializedName("Actual Rainfall (mm)")
+    @SerializedName("actualRainfall")
     private double actualRainfall;
 
-    @SerializedName("Predicted Rainfall (mm)")
+    @SerializedName("predictedRainfall")
     private double predictedRainfall;
 
     public String getDate() {

@@ -76,16 +76,13 @@ public class RainfallChart extends AppCompatActivity {
         // Modify the loop where you populate the Entry lists
         int index=0;
         for (RainfallData data : rainfallDataList) {
-            if (!Double.isNaN(data.getActualRainfall())) {
+            if (index<11) {
                 // Turn your data into Entry objects
                 actualRainfallEntries.add(new Entry(index, (float) data.getActualRainfall()));
-                lastActualEntry = new Entry(index, (float) data.getActualRainfall());
-            } else if (!Double.isNaN(data.getPredictedRainfall())) {
-                if (lastActualEntry != null) {
-                    // Add a connecting entry between last actual and first predicted
-                    predictedRainfallEntries.add(lastActualEntry);
-                    lastActualEntry = null; // Reset the last actual entry
-                }
+            } else if(index==11){
+                predictedRainfallEntries.add(new Entry(index, (float) data.getActualRainfall()));
+                predictedRainfallEntries.add(new Entry(index, (float) data.getPredictedRainfall()));
+            } else {
                 predictedRainfallEntries.add(new Entry(index, (float) data.getPredictedRainfall()));
             }
             index++;

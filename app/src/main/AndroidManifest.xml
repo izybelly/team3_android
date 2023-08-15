@@ -26,9 +26,6 @@
             android:name=".NearestLocationActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".Home"
             android:exported="true">
             <intent-filter>
