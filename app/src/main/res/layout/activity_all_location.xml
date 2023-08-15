@@ -7,101 +7,139 @@
     android:layout_height="match_parent"
     tools:context=".AllLocationActivity">
 
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <ImageView
+            android:id="@+id/mapImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:cropToPadding="false"
+            android:scaleType="fitXY"
+            android:src="@drawable/sg_map" />
+        <ImageView
+            android:id="@+id/pin_Changi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginStart="280dp"
+            android:src="@drawable/location_pin"
+            />
+        <ImageView
+            android:id="@+id/pin_Clementi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="95dp"
+            android:layout_marginStart="150dp"
+            android:src="@drawable/location_pin"
+            />
+        <ImageView
+            android:id="@+id/pin_Kranji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="115dp"
+            android:src="@drawable/location_pin"
+            />
+        <ImageView
+            android:id="@+id/pin_Sentosa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="145dp"
+            android:layout_marginStart="175dp"
+            android:src="@drawable/location_pin"
+            />
+    </FrameLayout>
+
     <!-- Text View -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View monthly prediction for selected location"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="View monthly prediction for selected locations"
+        android:textAlignment="center"
         android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="120dp" />
-
-    <!-- Checkbox Set 1 -->
-    <CheckBox
-        android:id="@+id/checkbox1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Changi"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="40dp"
-        />
-
-    <!-- Checkbox Set 2 -->
-    <CheckBox
-        android:id="@+id/checkbox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clementi"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox1"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="40dp"
-        />
-
-    <!-- Checkbox Set 3 -->
-    <CheckBox
-        android:id="@+id/checkbox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sentosa"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox2"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="40dp"
-        />
-
-    <!-- Checkbox Set 4 -->
-    <CheckBox
-        android:id="@+id/checkbox4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kranji"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox3"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="40dp"
-        />
-
-    <SeekBar
-        android:id="@+id/numericSeekBar_all"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        app:layout_constraintTop_toBottomOf="@id/checkbox4"
-        app:layout_constraintBottom_toTopOf="@id/messageTextView_all"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:max="11"/>
-
-    <!-- TextView for displaying message -->
-    <TextView
-        android:id="@+id/messageTextView_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintTop_toBottomOf="@id/numericSeekBar_all"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/submit_allloc"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="15dp" />
+        app:layout_constraintTop_toBottomOf="@id/frameLayout" />
 
     <!-- Button -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        style="@android:style/Widget.ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbarStyle="insideInset"
+        app:layout_constraintBottom_toTopOf="@id/submit_allloc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/cbChangi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Changi" />
+
+            <CheckBox
+                android:id="@+id/cbClementi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Clementi"/>
+
+            <CheckBox
+                android:id="@+id/cbKranji"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Kranji (coming soon!)"
+                android:enabled="false"/>
+
+            <CheckBox
+                android:id="@+id/cbSentosa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Sentosa (coming soon!)"
+                android:enabled="false"/>
+        </LinearLayout>
+    </ScrollView>
+
     <Button
         android:id="@+id/submit_allloc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Generate Prediction"
-        app:layout_constraintTop_toBottomOf="@+id/messageTextView_all"
+        android:text="Fetch Rainfall Forecast"
+        app:layout_constraintTop_toBottomOf="@id/scrollView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         />

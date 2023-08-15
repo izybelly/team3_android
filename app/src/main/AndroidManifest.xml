@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".SelectedLocationPredictionActivity"
+            android:exported="false" />
+        <activity
             android:name=".RainfallChart"
             android:exported="false" />
         <activity

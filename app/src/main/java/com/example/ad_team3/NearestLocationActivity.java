@@ -80,7 +80,7 @@ public class NearestLocationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int selectedValue = seekBar.getProgress() + 1;
 
-                String baseUrl = "https://10.249.150.225:8443";
+                String baseUrl = "https://8.222.245.68:8443/";
 
                 // Create a custom OkHttpClient with the TrustManager that trusts all certificates (only for testing, not recommended for production)
                 OkHttpClient okHttpClient = getUnsafeOkHttpClient();
