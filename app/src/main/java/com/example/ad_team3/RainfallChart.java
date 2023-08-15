@@ -80,8 +80,8 @@ public class RainfallChart extends AppCompatActivity {
                 // Turn your data into Entry objects
                 actualRainfallEntries.add(new Entry(index, (float) data.getActualRainfall()));
             } else if(index==11){
+                actualRainfallEntries.add(new Entry(index, (float) data.getActualRainfall()));
                 predictedRainfallEntries.add(new Entry(index, (float) data.getActualRainfall()));
-                predictedRainfallEntries.add(new Entry(index, (float) data.getPredictedRainfall()));
             } else {
                 predictedRainfallEntries.add(new Entry(index, (float) data.getPredictedRainfall()));
             }
