@@ -85,7 +85,7 @@ public class Home extends AppCompatActivity {
                 // Permission granted, proceed with location access
                 accessLocation();
             } else {
-                // Permission denied, show a message or handle accordingly
+                // Permission denied, show a message or handle accordinlocalgly
                 Toast.makeText(this, "Location permission denied.", Toast.LENGTH_SHORT).show();
             }
         }
