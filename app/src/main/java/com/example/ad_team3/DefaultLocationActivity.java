@@ -45,11 +45,17 @@ public class DefaultLocationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default_location);
 
-        String nearestLocation = getIntent().getStringExtra("nearestLocation");
+        String nearestLocation;
+        double distance;
 
         TextView nearestLocationTextView = findViewById(R.id.nearestLocationTextView);
         nearestLocation = getIntent().getStringExtra("nearestLocation");
         nearestLocationTextView.setText("Your nearest location is: " + nearestLocation);
+
+        TextView distanceTextView = findViewById(R.id.distance);
+        distance = getIntent().getDoubleExtra("distance", 0);
+        distanceTextView.setText("You are " + distance + " km away from " + nearestLocation);
+
 
         RemoteApiManager apiManager = new RemoteApiManager(nearestLocation);
         apiManager.sendRainfallData(new RemoteApiManager.RainfallDataCallback() {

@@ -9,10 +9,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -86,29 +88,21 @@ public class TermsAndConditions extends AppCompatActivity {
                 double userLat = lastKnownLocation.getLatitude();
                 double userLong = lastKnownLocation.getLongitude();
 
+                // Log the latitude and longitude
+                Log.d("Location", "Latitude: " + userLat + ", Longitude: " + userLong);
+
                 List<CustomLocation> locations = new ArrayList<>();
                 locations.add(new CustomLocation("Changi", 1.3678, 103.9826));
                 locations.add(new CustomLocation("Clementi", 1.3337, 103.7768));
 
-                CustomLocation closestLocation = null;
-                float smallestDistance = Float.MAX_VALUE;
-                String nearestLocation = "";
+                CustomLocation closestLoc = LocationUtils.findNearestLocation(lastKnownLocation, locations);
+                String nearestLocation = closestLoc.getName();
 
-                for (CustomLocation loc : locations) {
-                    float[] results = new float[1];
-                    Location.distanceBetween(userLat, userLong, loc.getLatitude(), loc.getLongitude(), results);
-                    float distance = results[0];
-
-                    if (distance < smallestDistance) {
-                        smallestDistance = distance;
-                        closestLocation = loc;
-                        nearestLocation = closestLocation.getName();
-                    }
-                }
-
-                if (closestLocation != null) {
+                if (nearestLocation != null) {
+                    double distanceToNearestLocation = LocationUtils.calculateDistance(lastKnownLocation, closestLoc);
                     Intent intent = new Intent(TermsAndConditions.this, DefaultLocationActivity.class);
                     intent.putExtra("nearestLocation", nearestLocation);
+                    intent.putExtra("distance", distanceToNearestLocation);
                     startActivity(intent);
                 }
             }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NearestLocationActivity">
+    tools:context=".DefaultLocationActivity">
 
     <TextView
         android:id="@+id/nearestLocationTextView"
@@ -18,21 +18,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="150dp"/>
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Distance: "
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/nearestLocationTextView"
+        app:layout_constraintBottom_toTopOf="@+id/predictionTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_marginTop="10dp"/>
+
 
     <TextView
         android:id="@+id/predictionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View monthly prediction for nearest location"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/nearestLocationTextView"
+        android:text="Monthly rainfall for nearest location"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/distance"
         app:layout_constraintBottom_toTopOf="@+id/chart"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="45dp"
         android:layout_marginBottom="8dp" />
 
     <com.github.mikephil.charting.charts.LineChart
@@ -42,7 +57,8 @@
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintTop_toBottomOf="@+id/predictionTextView"
         app:layout_constraintBottom_toTopOf="@+id/viewOthers"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        android:layout_marginBottom="25dp"/>
 
     <Button
         android:id="@+id/viewOthers"
@@ -55,7 +71,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="25dp"
         android:layout_marginBottom="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
