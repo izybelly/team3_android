@@ -107,7 +107,7 @@ public class TermsAndConditions extends AppCompatActivity {
                 }
 
                 if (closestLocation != null) {
-                    Intent intent = new Intent(TermsAndConditions.this, NearestLocationActivity.class);
+                    Intent intent = new Intent(TermsAndConditions.this, DefaultLocationActivity.class);
                     intent.putExtra("nearestLocation", nearestLocation);
                     startActivity(intent);
                 }
