@@ -20,10 +20,13 @@ import java.util.ArrayList;
 
 public class AllLocationActivity extends AppCompatActivity {
     private ArrayList<String> checkedItems = new ArrayList<>();
+    private ArrayList<CheckBox> allCheckboxes = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_location);
+        Button submit = findViewById(R.id.submit_allloc);
+        submit.setEnabled(false);
         ImageView pinChangi = findViewById(R.id.pin_Changi);
         ImageView pinClementi = findViewById(R.id.pin_Clementi);
         CheckBox changi = findViewById(R.id.cbChangi);
@@ -31,12 +34,16 @@ public class AllLocationActivity extends AppCompatActivity {
         CheckBox sentosa = findViewById(R.id.cbSentosa);
         CheckBox kranji = findViewById(R.id.cbKranji);
 
+        allCheckboxes.add(changi);
+        allCheckboxes.add(clementi);
+
         changi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // Change the color filter based on the checkbox state
                 int color = isChecked ? Color.RED : Color.BLACK;
                 pinChangi.setColorFilter(color);
+                submit.setEnabled(isAnyCheckboxChecked(allCheckboxes));
             }
         });
         clementi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -45,12 +52,10 @@ public class AllLocationActivity extends AppCompatActivity {
                 // Change the color filter based on the checkbox state
                 int color = isChecked ? Color.RED : Color.BLACK;
                 pinClementi.setColorFilter(color);
+                submit.setEnabled(isAnyCheckboxChecked(allCheckboxes));
             }
         });
 
-
-
-        Button submit = findViewById(R.id.submit_allloc);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,5 +82,12 @@ public class AllLocationActivity extends AppCompatActivity {
             }
         });
     }
-
+    private boolean isAnyCheckboxChecked(ArrayList<CheckBox> checkboxes) {
+        for (CheckBox checkbox : checkboxes) {
+            if (checkbox.isChecked()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
