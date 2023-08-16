@@ -126,7 +126,7 @@ public class RemoteApiManager {
                 return 1;
             case "Changi":
                 return 2;
-            // Handle other cases if necessary
+            // Handle more locations if adding, integer has to match to the springboot mapping
             default:
                 return -1;
         }

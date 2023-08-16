@@ -1,0 +1,65 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="@color/white"
+    android:layout_marginBottom="10dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/chart_weather_station"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Weather Station"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/selectedLocationLineChart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/xaxis_label"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chart_weather_station"
+        app:layout_constraintVertical_bias="0.0"
+        app:flow_horizontalBias="1"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <TextView
+        android:id="@+id/yaxis_label"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="fill"
+        android:rotation="-90"
+        android:text="Rainfall (mm)"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@id/xaxis_label"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/selectedLocationLineChart"
+        app:layout_constraintTop_toBottomOf="@id/chart_weather_station"
+        app:layout_constraintVertical_bias="0.0"
+        />
+
+    <TextView
+        android:id="@+id/xaxis_label"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Month"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
