@@ -29,12 +29,9 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
+
 
 
 public class DefaultLocationActivity extends AppCompatActivity {
@@ -46,7 +43,7 @@ public class DefaultLocationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_default_location);
         String nearestLocation = accessLocation();
         RemoteApiManager apiManager = new RemoteApiManager(nearestLocation);
-        apiManager.sendRainfallData(new RemoteApiManager.RainfallDataCallback() {
+        apiManager.sendRainfallData(new RainfallDataCallback() {
             @Override
             public void onRainfallDataReceived(List<RainfallData> rainfallDataList) {
                 chartData(rainfallDataList);
@@ -107,8 +104,6 @@ public class DefaultLocationActivity extends AppCompatActivity {
 
         List<Entry> actualRainfallEntries = new ArrayList<>();
         List<Entry> predictedRainfallEntries = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
-        Entry lastActualEntry = null;
         // Populate the Entry lists
         int index=0;
         for (RainfallData data : rainfallDataList) {
@@ -262,7 +257,7 @@ public class DefaultLocationActivity extends AppCompatActivity {
         String nearestLocation = accessLocation();
         if (nearestLocation != null) {
             RemoteApiManager apiManager = new RemoteApiManager(nearestLocation);
-            apiManager.sendRainfallData(new RemoteApiManager.RainfallDataCallback() {
+            apiManager.sendRainfallData(new RainfallDataCallback() {
                 @Override
                 public void onRainfallDataReceived(List<RainfallData> rainfallDataList) {
                     chartData(rainfallDataList);

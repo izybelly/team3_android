@@ -24,9 +24,6 @@
             android:name=".SelectedLocationPredictionActivity"
             android:exported="false" />
         <activity
-            android:name=".RainfallChart"
-            android:exported="false" />
-        <activity
             android:name=".AllLocationActivity"
             android:exported="false" />
         <activity

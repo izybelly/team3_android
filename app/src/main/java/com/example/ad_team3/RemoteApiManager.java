@@ -8,7 +8,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
 import javax.net.ssl.SSLContext;
@@ -25,14 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RemoteApiManager {
     private final String baseUrl = "https://8.222.245.68:8443/";
     private final int periods = 12;
-    private String nearestLocation;
 
-    private int stationId;
+    private final int stationId;
 
-    private PredictionModelApi api;
+    PredictionModelApi api;
+
 
     public RemoteApiManager(String nearestLocation){
-        this.nearestLocation = nearestLocation;
         this.stationId = mapLocationToStationId(nearestLocation);
 
         OkHttpClient okHttpClient = getUnsafeOkHttpClient();
@@ -84,13 +82,8 @@ public class RemoteApiManager {
     }
 
 
-    public interface RainfallDataCallback {
-        void onRainfallDataReceived(List<RainfallData> rainfallDataList);
-        void onRainfallDataError(String errorMessage);
-    }
 
-
-
+    // Empty checkServerTrusted methods in custom X509TrustManager implementation, no certificate issued from TCA available
     private OkHttpClient getUnsafeOkHttpClient() {
         try {
             TrustManager[] trustAllCertificates = new TrustManager[]{
@@ -99,10 +92,10 @@ public class RemoteApiManager {
                             return new X509Certificate[0];
                         }
 
-                        public void checkClientTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        public void checkClientTrusted(X509Certificate[] certs, String authType) {
                         }
 
-                        public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+                        public void checkServerTrusted(X509Certificate[] certs, String authType) {
                         }
                     }
             };

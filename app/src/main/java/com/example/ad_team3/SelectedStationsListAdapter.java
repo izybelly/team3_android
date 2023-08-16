@@ -71,11 +71,10 @@ public class SelectedStationsListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        // TODO set up your line chart and call the API for the selected location
         String location = selectedLocations.get(position);
         viewHolder.weatherStationName.setText(location);
         RemoteApiManager apiManager = new RemoteApiManager(location);
-        apiManager.sendRainfallData(new RemoteApiManager.RainfallDataCallback() {
+        apiManager.sendRainfallData(new RainfallDataCallback() {
             @Override
             public void onRainfallDataReceived(List<RainfallData> rainfallDataList) {
                 chartData(viewHolder.lineChart,context, rainfallDataList);
@@ -86,7 +85,6 @@ public class SelectedStationsListAdapter extends BaseAdapter {
                 Log.e("Selected Location Activity", "Error" + errorMessage);
             }
         });
-        // TODO Populate the chart with data and customize it based on your requirements
 
         return convertView;
     }

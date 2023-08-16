@@ -30,5 +30,11 @@ public class RainfallData implements Serializable {
         return predictedRainfall;
     }
 
+    public RainfallData(String date, double actualRainfall, double predictedRainfall) {
+        this.date = date;
+        this.actualRainfall = actualRainfall;
+        this.predictedRainfall = predictedRainfall;
+    }
+
 }
 
