@@ -10,15 +10,16 @@
         android:id="@+id/nearestLocationTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your nearest location is: "
+        android:layout_marginTop="20dp"
+        android:text="Your nearest weather station is: "
+        android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/predictionTextView"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/distance"
@@ -26,6 +27,7 @@
         android:layout_height="wrap_content"
         android:text = "Distance: "
         android:textSize="18sp"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/nearestLocationTextView"
         app:layout_constraintBottom_toTopOf="@+id/predictionTextView"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,9 +50,12 @@
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.5"
         android:layout_marginTop="45dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textAlignment="center"/>
 
-    <com.github.mikephil.charting.charts.LineChart
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -58,7 +63,54 @@
         app:layout_constraintTop_toBottomOf="@+id/predictionTextView"
         app:layout_constraintBottom_toTopOf="@+id/viewOthers"
         android:background="@color/white"
-        android:layout_marginBottom="25dp"/>
+        android:layout_marginBottom="10dp"
+        android:padding="10dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chartPlot"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/xaxis_label"
+            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:flow_horizontalBias="1"
+            app:layout_constraintWidth_percent="0.9" />
+
+        <TextView
+            android:id="@+id/yaxis_label"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="fill"
+            android:rotation="-90"
+            android:text="Rainfall (mm)"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@id/xaxis_label"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/chartPlot"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            />
+
+        <TextView
+            android:id="@+id/xaxis_label"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="Month"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHeight_percent="0.1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <Button
         android:id="@+id/viewOthers"
@@ -71,6 +123,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.6"
         app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="10dp" />
+    <Button
+        android:id="@+id/refreshButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh Current Location"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/viewOthers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

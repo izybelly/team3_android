@@ -23,7 +23,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RemoteApiManager {
-    private final String baseUrl = "https://10.0.2.2:8443/";
+    private final String baseUrl = "https://8.222.245.68:8443/";
     private final int periods = 12;
     private String nearestLocation;
 

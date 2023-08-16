@@ -27,6 +27,12 @@ public class TermsAndConditions extends AppCompatActivity {
     private static final String PREFS_NAME = "MyPrefs";
     private static final String TERMS_ACCEPTED_KEY = "termsAccepted";
 
+    private static final String[] LOCATION_PERMISSIONS = {
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,26 +44,34 @@ public class TermsAndConditions extends AppCompatActivity {
         boolean termsAccepted = prefs.getBoolean(TERMS_ACCEPTED_KEY, false);
 
         if (termsAccepted) {
-            accessLocation();
+            Intent intent = new Intent(TermsAndConditions.this, DefaultLocationActivity.class);
+            startActivity(intent);
+            finish();
             return;
         }
 
         terms_conditions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(TermsAndConditions.this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    // Permission is not granted, request it
+                if (ContextCompat.checkSelfPermission(TermsAndConditions.this, LOCATION_PERMISSIONS[0])
+                        != PackageManager.PERMISSION_GRANTED ||
+                        ContextCompat.checkSelfPermission(TermsAndConditions.this, LOCATION_PERMISSIONS[1])
+                                != PackageManager.PERMISSION_GRANTED) {
+
+                    // Permissions are not granted, request them
                     ActivityCompat.requestPermissions(TermsAndConditions.this,
-                            new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                            LOCATION_PERMISSIONS,
                             LOCATION_PERMISSION_REQUEST_CODE);
                 } else {
-                    // Permission is already granted, proceed with location access
+                    // Permissions are already granted, proceed with location access
                     prefs.edit().putBoolean(TERMS_ACCEPTED_KEY, true).apply();
-                    accessLocation();
+                    Intent intent = new Intent(TermsAndConditions.this, DefaultLocationActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
+
 
 
     }
@@ -68,43 +82,16 @@ public class TermsAndConditions extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, proceed with location access
-                accessLocation();
+            if (grantResults.length > 0 &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                    grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                Intent intent = new Intent(TermsAndConditions.this, DefaultLocationActivity.class);
+                startActivity(intent);
+                finish();
             } else {
                 // Permission denied, show a message or handle accordingly
                 Toast.makeText(this, "Kindly review and accept the Terms & Conditions", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void accessLocation() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            if (lastKnownLocation != null) {
-                double userLat = lastKnownLocation.getLatitude();
-                double userLong = lastKnownLocation.getLongitude();
-
-                // Log the latitude and longitude
-                Log.d("Location", "Latitude: " + userLat + ", Longitude: " + userLong);
-
-                List<CustomLocation> locations = new ArrayList<>();
-                locations.add(new CustomLocation("Changi", 1.3678, 103.9826));
-                locations.add(new CustomLocation("Clementi", 1.3337, 103.7768));
-
-                CustomLocation closestLoc = LocationUtils.findNearestLocation(lastKnownLocation, locations);
-                String nearestLocation = closestLoc.getName();
-
-                if (nearestLocation != null) {
-                    double distanceToNearestLocation = LocationUtils.calculateDistance(lastKnownLocation, closestLoc);
-                    Intent intent = new Intent(TermsAndConditions.this, DefaultLocationActivity.class);
-                    intent.putExtra("nearestLocation", nearestLocation);
-                    intent.putExtra("distance", distanceToNearestLocation);
-                    startActivity(intent);
-                }
             }
         }
     }
