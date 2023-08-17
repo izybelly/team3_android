@@ -9,17 +9,16 @@
 
     <string name="terms_conditions">
     <![CDATA[
-    Terms and Conditions
+    Terms and Conditions\n\n
 
-    Welcome to WeatherWise App! By using our services, you agree to the following terms and conditions:
+    Welcome to WeatherWise App! By using our services, you agree to the following terms and conditions:\n\n
+    1. Location Data: WeatherWise App collects and uses your location data to provide personalized weather forecasts. Your location information helps us deliver accurate predictions tailored to your area.\n\n
 
-    1. Location Data: WeatherWise App collects and uses your location data to provide personalized weather forecasts. Your location information helps us deliver accurate predictions tailored to your area.
+    2. Privacy: We respect your privacy and ensure that your location data is used solely for weather forecasting purposes. Your data will not be shared with third parties without your consent.\n\n
 
-    2. Privacy: We respect your privacy and ensure that your location data is used solely for weather forecasting purposes. Your data will not be shared with third parties without your consent.
+    3. Accuracy: While we strive to provide accurate weather predictions, WeatherWise App is not liable for any inaccuracies or errors in the forecasts.\n\n
 
-    3. Accuracy: While we strive to provide accurate weather predictions, WeatherWise App is not liable for any inaccuracies or errors in the forecasts.
-
-    4. Usage: You agree to use the WeatherWise App responsibly and adhere to local laws and regulations.
+    4. Usage: You agree to use the WeatherWise App responsibly and adhere to local laws and regulations.\n\n
 
     By clicking "I Agree," you acknowledge that you have read and understood these terms and conditions. Thank you for choosing WeatherWise App!
     ]]>
