@@ -38,3 +38,5 @@ public class LocationUtils {
         return locationA.distanceTo(locationB) / 1000.0;
     }
 }
+
+

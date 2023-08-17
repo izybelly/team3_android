@@ -22,5 +22,7 @@ public class CustomLocation {
     public double getLongitude() {
         return longitude;
     }
+
+
 }
 

@@ -46,7 +46,11 @@ public class DefaultLocationActivity extends AppCompatActivity {
         apiManager.sendRainfallData(new RainfallDataCallback() {
             @Override
             public void onRainfallDataReceived(List<RainfallData> rainfallDataList) {
-                chartData(rainfallDataList);
+                if (rainfallDataList != null && !rainfallDataList.isEmpty()) {
+                    chartData(rainfallDataList);
+                } else {
+                    Log.e("onRainfallDataReceived", "Invalid List passed to charting");
+                }
             }
 
             @Override

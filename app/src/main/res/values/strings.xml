@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AD_Team3</string>
+    <string name="app_name">WeatherWise</string>
     <string name="title_activity_main2">MainActivity2</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
